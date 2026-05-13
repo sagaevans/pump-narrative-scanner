@@ -1,0 +1,356 @@
+/* Pump Narrative Scanner - Dashboard Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #0f0f1a;
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 30px 20px 20px;
+    margin-bottom: 24px;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #00d4ff;
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+}
+
+header .subtitle {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+/* Main container */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Disclaimer */
+.disclaimer {
+    background-color: #1a1a2e;
+    border-left: 4px solid #ff9800;
+    padding: 10px 16px;
+    margin-bottom: 24px;
+    font-size: 0.82rem;
+    color: #999;
+    border-radius: 4px;
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+    background-color: #1a1a2e;
+    padding: 18px 20px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #2a2a3e;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.filter-group label {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-group input,
+.filter-group select {
+    background-color: #0f0f1a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px 12px;
+    color: #e0e0e0;
+    font-size: 0.9rem;
+    min-width: 160px;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    outline: none;
+    border-color: #00d4ff;
+}
+
+.filter-group input::placeholder {
+    color: #555;
+}
+
+/* Buttons */
+.btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn-primary {
+    background-color: #00d4ff;
+    color: #0f0f1a;
+}
+
+.btn-primary:hover {
+    background-color: #00b8e6;
+}
+
+.btn-secondary {
+    background-color: #2a2a3e;
+    color: #ccc;
+    border: 1px solid #444;
+}
+
+.btn-secondary:hover {
+    background-color: #333;
+}
+
+/* Results info */
+.results-info {
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Token list */
+#token-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Token card */
+.token-card {
+    background-color: #1a1a2e;
+    border: 1px solid #2a2a3e;
+    border-radius: 8px;
+    padding: 18px 20px;
+    transition: border-color 0.2s;
+}
+
+.token-card:hover {
+    border-color: #444;
+}
+
+.token-card.risk-high {
+    border-left: 4px solid #ff4444;
+}
+
+.token-card.risk-medium {
+    border-left: 4px solid #ff9800;
+}
+
+.token-card.risk-low {
+    border-left: 4px solid #4caf50;
+}
+
+/* Card header */
+.token-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.token-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.token-symbol {
+    font-size: 0.85rem;
+    color: #00d4ff;
+    background-color: rgba(0, 212, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-left: 8px;
+}
+
+.risk-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+}
+
+.risk-badge.high {
+    background-color: rgba(255, 68, 68, 0.15);
+    color: #ff4444;
+}
+
+.risk-badge.medium {
+    background-color: rgba(255, 152, 0, 0.15);
+    color: #ff9800;
+}
+
+.risk-badge.low {
+    background-color: rgba(76, 175, 80, 0.15);
+    color: #4caf50;
+}
+
+/* Card body */
+.token-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.detail-label {
+    font-size: 0.7rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detail-value {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.detail-value.score {
+    font-weight: 600;
+    font-family: "SF Mono", "Fira Code", monospace;
+}
+
+.detail-value.score-high {
+    color: #ff4444;
+}
+
+.detail-value.score-medium {
+    color: #ff9800;
+}
+
+.detail-value.score-low {
+    color: #4caf50;
+}
+
+/* Mint address */
+.mint-address {
+    font-family: "SF Mono", "Fira Code", monospace;
+    font-size: 0.78rem;
+    color: #888;
+    word-break: break-all;
+}
+
+/* Reason */
+.token-reason {
+    font-size: 0.85rem;
+    color: #999;
+    font-style: italic;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+}
+
+/* Card footer */
+.token-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.btn-open {
+    padding: 6px 14px;
+    background-color: rgba(0, 212, 255, 0.1);
+    color: #00d4ff;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-open:hover {
+    background-color: rgba(0, 212, 255, 0.2);
+}
+
+/* Narrative badge */
+.narrative-badge {
+    display: inline-block;
+    font-size: 0.78rem;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background-color: #2a2a3e;
+    color: #aaa;
+    border: 1px solid #333;
+}
+
+.narrative-badge.disease_virus { color: #ff4444; border-color: #ff4444; }
+.narrative-badge.lockdown_pandemic { color: #ff6b6b; border-color: #ff6b6b; }
+.narrative-badge.war { color: #ff5252; border-color: #ff5252; }
+.narrative-badge.politics { color: #ab47bc; border-color: #ab47bc; }
+.narrative-badge.ai { color: #00e5ff; border-color: #00e5ff; }
+.narrative-badge.celebrity { color: #ffd740; border-color: #ffd740; }
+.narrative-badge.breaking_news { color: #ff7043; border-color: #ff7043; }
+.narrative-badge.finance_panic { color: #ef5350; border-color: #ef5350; }
+.narrative-badge.animal_meme { color: #66bb6a; border-color: #66bb6a; }
+.narrative-badge.absurd_meme { color: #29b6f6; border-color: #29b6f6; }
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #555;
+    font-style: italic;
+}
+
+/* Loading */
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+    }
+
+    .filter-group input,
+    .filter-group select {
+        min-width: 100%;
+    }
+
+    .token-details {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+}
