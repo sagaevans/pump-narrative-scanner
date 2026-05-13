@@ -177,4 +177,46 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(() => {});
     }
+
+    // Refresh button logic
+    const refreshBtn = document.getElementById("refresh-btn");
+    const refreshStatus = document.getElementById("refresh-status");
+
+    refreshBtn.addEventListener("click", function () {
+        refreshBtn.disabled = true;
+        refreshBtn.textContent = "Refreshing...";
+        refreshStatus.style.display = "none";
+
+        fetch("/api/refresh", { method: "POST" })
+            .then(response => response.json())
+            .then(data => {
+                refreshBtn.disabled = false;
+                refreshBtn.textContent = "Refresh Live Data";
+
+                // Show status message
+                refreshStatus.style.display = "block";
+                if (data.success) {
+                    refreshStatus.className = "refresh-status refresh-success";
+                    refreshStatus.textContent = data.message;
+                    // Reload token list
+                    loadTokens();
+                    updateDataSource();
+                } else {
+                    refreshStatus.className = "refresh-status refresh-error";
+                    refreshStatus.textContent = data.message;
+                }
+
+                // Auto-hide after 6 seconds
+                setTimeout(() => { refreshStatus.style.display = "none"; }, 6000);
+            })
+            .catch(err => {
+                refreshBtn.disabled = false;
+                refreshBtn.textContent = "Refresh Live Data";
+                refreshStatus.style.display = "block";
+                refreshStatus.className = "refresh-status refresh-error";
+                refreshStatus.textContent = "Network error. Could not reach server.";
+                setTimeout(() => { refreshStatus.style.display = "none"; }, 6000);
+                console.error("Refresh failed:", err);
+            });
+    });
 });

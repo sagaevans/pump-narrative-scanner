@@ -158,6 +158,52 @@ main {
     border: 1px solid rgba(255, 152, 0, 0.3);
 }
 
+.results-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-refresh {
+    padding: 6px 14px;
+    background-color: rgba(0, 212, 255, 0.1);
+    color: #00d4ff;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 4px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+.btn-refresh:hover {
+    background-color: rgba(0, 212, 255, 0.2);
+}
+
+.btn-refresh:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.refresh-status {
+    padding: 8px 14px;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    margin-bottom: 14px;
+}
+
+.refresh-status.refresh-success {
+    background-color: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    color: #4caf50;
+}
+
+.refresh-status.refresh-error {
+    background-color: rgba(255, 68, 68, 0.1);
+    border: 1px solid rgba(255, 68, 68, 0.3);
+    color: #ff4444;
+}
+
 /* Token list */
 #token-list {
     display: flex;
