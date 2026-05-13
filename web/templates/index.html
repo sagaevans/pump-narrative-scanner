@@ -46,8 +46,14 @@
         <!-- Results count -->
         <div class="results-info">
             <span id="results-count">Loading...</span>
-            <span id="data-source-badge" class="data-source-badge">...</span>
+            <div class="results-actions">
+                <span id="data-source-badge" class="data-source-badge">...</span>
+                <button id="refresh-btn" class="btn btn-refresh">Refresh Live Data</button>
+            </div>
         </div>
+
+        <!-- Refresh status message -->
+        <div id="refresh-status" class="refresh-status" style="display: none;"></div>
 
         <!-- Token cards -->
         <section id="token-list"></section>
