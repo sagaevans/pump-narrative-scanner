@@ -12,6 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // Load tokens on page load
     loadTokens();
 
+    // Also show data source indicator
+    updateDataSource();
+
     // Filter button events
     applyBtn.addEventListener("click", loadTokens);
     clearBtn.addEventListener("click", function () {
@@ -159,5 +162,19 @@ document.addEventListener("DOMContentLoaded", function () {
         const div = document.createElement("div");
         div.textContent = str;
         return div.innerHTML;
+    }
+
+    function updateDataSource() {
+        fetch("/api/health")
+            .then(response => response.json())
+            .then(data => {
+                const badge = document.getElementById("data-source-badge");
+                if (badge && data.data_source) {
+                    const isLive = data.data_source === "live";
+                    badge.textContent = isLive ? "LIVE DATA" : "SAMPLE DATA";
+                    badge.className = "data-source-badge " + (isLive ? "source-live" : "source-fallback");
+                }
+            })
+            .catch(() => {});
     }
 });

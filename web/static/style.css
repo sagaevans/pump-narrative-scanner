@@ -129,9 +129,33 @@ main {
 
 /* Results info */
 .results-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 16px;
     font-size: 0.85rem;
     color: #666;
+}
+
+.data-source-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+}
+
+.data-source-badge.source-live {
+    background-color: rgba(76, 175, 80, 0.15);
+    color: #4caf50;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.data-source-badge.source-fallback {
+    background-color: rgba(255, 152, 0, 0.15);
+    color: #ff9800;
+    border: 1px solid rgba(255, 152, 0, 0.3);
 }
 
 /* Token list */

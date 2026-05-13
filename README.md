@@ -22,8 +22,9 @@ GitHub is used only as the source code repository. The application runs locally 
 
 ## Features (Currently Implemented)
 
-- **Live Token Fetching** — Pulls newly created token metadata from pump.fun's public API (read-only, no authentication required)
-- **Automatic Fallback** — If the live API is unavailable (timeout, error, offline), the app falls back to built-in sample data so the dashboard always works locally
+- **Multi-Source Live Data** — Fetches real-time token data from multiple public APIs (DexScreener primary, pump.fun v3 secondary), no authentication required
+- **Automatic Fallback** — If all live sources are unavailable (timeout, error, offline), the app falls back to built-in sample data so the dashboard always works locally
+- **Data Source Indicator** — Terminal and dashboard clearly show `DATA_SOURCE=live` or `DATA_SOURCE=fallback` so you always know what you're looking at
 - **Narrative Detection** — Classifies tokens into 11 narrative categories using keyword matching against token name, symbol, and description
 - **Multi-Factor Scoring Engine** — Scores each token across 6 dimensions with a weighted final score
 - **Risk Level Assessment** — Assigns low/medium/high risk based on pump-like signals and safety indicators
@@ -230,15 +231,28 @@ The `tokens` table contains 22 columns:
 
 ## How the Fallback Works
 
-The pump client (`modules/pump_client.py`) attempts to fetch live data from pump.fun's public API. If the request fails for any reason, the app gracefully falls back to 7 built-in sample tokens:
+The pump client (`modules/pump_client.py`) tries multiple public data sources in order:
+
+1. **DexScreener token-boosts/latest** (primary — most reliable, includes descriptions)
+2. **DexScreener token-profiles/latest** (secondary — alternate endpoint)
+3. **pump.fun frontend-api-v3** (tertiary — may be blocked by Cloudflare in some environments)
+4. **Built-in sample data** (fallback — always works offline)
 
 **Fallback triggers:**
-- API request timeout (15 seconds)
+- API request timeout (20 seconds)
 - Connection error or network unavailable
 - Non-200 HTTP status code
 - Empty or malformed API response
 
-**Result:** The dashboard always works, whether or not you have an internet connection. Sample data covers diverse narrative categories for testing the scoring system.
+**Terminal output clearly shows:**
+```
+DATA_SOURCE=live    (real data loaded successfully)
+DATA_SOURCE=fallback (sample data in use)
+```
+
+The dashboard also displays a badge showing "LIVE DATA" (green) or "SAMPLE DATA" (orange).
+
+**Result:** The dashboard always works, whether or not you have an internet connection.
 
 ---
 
@@ -271,8 +285,11 @@ Configured via `.env` file (copy from `.env.example`):
 | `APP_PORT` | `8000` | Port for the web server |
 | `DATABASE_PATH` | `data/coins.db` | Path to SQLite database file |
 | `SCAN_INTERVAL_SECONDS` | `60` | Scan interval (reserved for future use) |
-| `PUMP_API_URL` | `https://frontend-api-v2.pump.fun/coins/latest` | Public API endpoint |
-| `PUMP_API_TIMEOUT` | `15` | API request timeout in seconds |
+| `DEXSCREENER_BOOSTS_URL` | `https://api.dexscreener.com/token-boosts/latest/v1` | DexScreener boosts endpoint (primary) |
+| `DEXSCREENER_PROFILES_URL` | `https://api.dexscreener.com/token-profiles/latest/v1` | DexScreener profiles endpoint (secondary) |
+| `DEXSCREENER_TOKENS_URL` | `https://api.dexscreener.com/tokens/v1/solana` | DexScreener batch token lookup |
+| `PUMP_API_URL` | `https://frontend-api-v3.pump.fun/coins/latest` | pump.fun API v3 endpoint (tertiary) |
+| `PUMP_API_TIMEOUT` | `20` | API request timeout in seconds |
 | `PUMP_FETCH_LIMIT` | `20` | Number of tokens to fetch per request |
 
 ---
