@@ -16,6 +16,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE_DIR)
 
 from modules.storage import get_tokens
+from modules.pump_client import get_data_source
 
 app = FastAPI(title="Pump Narrative Scanner", version="0.1.0")
 
@@ -36,7 +37,11 @@ async def index(request: Request):
 @app.get("/api/health")
 async def health():
     """Health check endpoint."""
-    return {"status": "ok", "app": "Pump Narrative Scanner"}
+    return {
+        "status": "ok",
+        "app": "Pump Narrative Scanner",
+        "data_source": get_data_source(),
+    }
 
 
 @app.get("/api/tokens")
@@ -73,4 +78,4 @@ async def api_tokens(
         risk_lower = risk_level.lower()
         tokens = [t for t in tokens if (t.get("risk_level") or "").lower() == risk_lower]
 
-    return {"tokens": tokens, "count": len(tokens)}
+    return {"tokens": tokens, "count": len(tokens), "data_source": get_data_source()}
